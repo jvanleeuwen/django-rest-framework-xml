@@ -72,14 +72,15 @@ class XMLParser(BaseParser):
         except ValueError:
             pass
 
-        try:
-            return int(value)
-        except ValueError:
-            pass
+        if not value.startswith('0'):
+            try:
+                return int(value)
+            except ValueError:
+                pass
 
-        try:
-            return decimal.Decimal(value)
-        except decimal.InvalidOperation:
-            pass
+            try:
+                return decimal.Decimal(value)
+            except decimal.InvalidOperation:
+                pass
 
         return value
